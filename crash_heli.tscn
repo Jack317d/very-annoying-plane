@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://cn0ed0bfpcal7"]
+
+[ext_resource type="Texture2D" uid="uid://dqw4qty35i2rv" path="res://heli.png" id="1_cmuwt"]
+[ext_resource type="Script" path="res://crash_heli.gd" id="1_vi42v"]
+[ext_resource type="Texture2D" uid="uid://yxvlo1emid06" path="res://boom.png" id="3_b5qbx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fargq"]
+radius = 21.0
+height = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5dux"]
+size = Vector2(3, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5ca4"]
+size = Vector2(12.5, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykt5p"]
+atlas = ExtResource("3_b5qbx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi5tc"]
+atlas = ExtResource("3_b5qbx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13k1p"]
+atlas = ExtResource("3_b5qbx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgndg"]
+atlas = ExtResource("3_b5qbx")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l0jv"]
+atlas = ExtResource("3_b5qbx")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ak8p2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykt5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi5tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13k1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgndg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l0jv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="CrashHeli" type="Node2D"]
+script = ExtResource("1_vi42v")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(25.5, 0)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_cmuwt")
+region_enabled = true
+region_rect = Rect2(43, 0, 19, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(26, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fargq")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+position = Vector2(11, 25)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_cmuwt")
+region_enabled = true
+region_rect = Rect2(36, 14, 24, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+position = Vector2(11, 26.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_v5dux")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3"]
+position = Vector2(-30, -4)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_cmuwt")
+region_enabled = true
+region_rect = Rect2(27, 4, 16, 6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D3"]
+polygon = PackedVector2Array(-51, -13, -43, -13, -40, -4, -5, -4, -5, 5, -49, 5, -55, -2, -55, -10)
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4"]
+position = Vector2(27, -28)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_cmuwt")
+region_enabled = true
+region_rect = Rect2(6, 8, 18, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4"]
+position = Vector2(27, -28.25)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_j5ca4")
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="."]
+position = Vector2(-75, 9)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D5"]
+position = Vector2(27, -28)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_cmuwt")
+region_enabled = true
+region_rect = Rect2(6, 8, 18, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D5"]
+position = Vector2(27, -28.25)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_j5ca4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_ak8p2")
+autoplay = "default"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://bybxbeu8s05fr"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_gts17"]
+[ext_resource type="PackedScene" uid="uid://p5gqv8me4mev" path="res://plane.tscn" id="2_m15qg"]
+[ext_resource type="PackedScene" uid="uid://duc4ssmg70mjl" path="res://crash.tscn" id="3_t6r6o"]
+[ext_resource type="Texture2D" uid="uid://dqy3mpdrvpbuy" path="res://icon.svg" id="4_l6jws"]
+[ext_resource type="PackedScene" uid="uid://2kl7fsw3h0s5" path="res://fan.tscn" id="5_scxr3"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_x1uw6"]
+scenes/1/scene = ExtResource("3_t6r6o")
+
+[sub_resource type="TileSet" id="TileSet_a0yem"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_x1uw6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ch6i"]
+size = Vector2(64, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0sf1"]
+size = Vector2(1528, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g35io"]
+size = Vector2(200, 576)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_gts17")
+levelNo = 8
+
+[node name="Plane" parent="." instance=ExtResource("2_m15qg")]
+position = Vector2(152, 128)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_a0yem")
+format = 2
+layer_0/tile_data = PackedInt32Array(3, 0, 65536, 4, 0, 65536, 5, 0, 65536, 6, 0, 65536, 7, 0, 65536, 8, 0, 65536, 9, 0, 65536, 10, 0, 65536, 11, 0, 65536, 12, 0, 65536, 589827, 0, 65536, 589828, 0, 65536, 589829, 0, 65536, 589830, 0, 65536, 589833, 0, 65536, 589835, 0, 65536, 589836, 0, 65536, 589837, 0, 65536, 589838, 0, 65536, 589839, 0, 65536, 589840, 0, 65536, 13, 0, 65536, 14, 0, 65536, 15, 0, 65536, 16, 0, 65536, 589841, 0, 65536, 2, 0, 65536, 1, 0, 65536, 65536, 0, 65536, 131072, 0, 65536, 196608, 0, 65536, 262144, 0, 65536, 327680, 0, 65536, 393216, 0, 65536, 458752, 0, 65536, 524288, 0, 65536, 589825, 0, 65536, 589826, 0, 65536, 65553, 0, 65536, 131089, 0, 65536, 393233, 0, 65536, 458769, 0, 65536, 524305, 0, 65536, 65545, 0, 65536, 131081, 0, 65536, 196617, 0, 65536, 262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589834, 0, 65536, 196625, 0, 65536, 851977, 0, 65536, 851976, 0, 65536, 851975, 0, 65536, 851974, 0, 65536, 851973, 0, 65536, 851972, 0, 65536, 851971, 0, 65536, 851970, 0, 65536, 851969, 0, 65536, 851968, 0, 65536, 917503, 0, 65536, 917502, 0, 65536, 917501, 0, 65536, 851988, 0, 65536, 851987, 0, 65536, 851986, 0, 65536, 851985, 0, 65536, 851984, 0, 65536, 851979, 0, 65536, 851978, 0, 65536, 851980, 0, 65536, 851981, 0, 65536, 851982, 0, 65536, 851983, 0, 65536, 917500, 0, 65536, 851964, 0, 65536, 786428, 0, 65536, 720892, 0, 65536, 655356, 0, 65536, 21, 0, 65536, 65557, 0, 65536, 131093, 0, 65536, 196629, 0, 65536, 262165, 0, 65536, 327701, 0, 65536, 393237, 0, 65536, 458773, 0, 65536, 524309, 0, 65536, 589845, 0, 65536, 655381, 0, 65536, 720917, 0, 65536, 786453, 0, 65536, 851989, 0, 65536, 589824, 0, 65536, 0, 0, 65536, 17, 0, 65536, 655359, 0, 65536, 655358, 0, 65536, 655357, 0, 65536, 19, 0, 65536, 20, 0, 65536, 18, 0, 65536)
+
+[node name="nEXT" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nEXT"]
+position = Vector2(1056, 320)
+shape = SubResource("RectangleShape2D_3ch6i")
+
+[node name="ColorRect" type="ColorRect" parent="nEXT"]
+offset_left = 1024.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 576.0
+color = Color(0, 1, 0, 0.392157)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(580, 732)
+shape = SubResource("RectangleShape2D_h0sf1")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1244, 352)
+shape = SubResource("RectangleShape2D_g35io")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 320)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.811765)
+position = Vector2(544, 608)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_l6jws")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.811765)
+position = Vector2(480, 608)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_l6jws")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 208.0
+offset_right = 592.0
+offset_bottom = 295.0
+theme_override_font_sizes/font_size = 30
+text = "Try thinking outside of the box."
+
+[node name="Fan" parent="." instance=ExtResource("5_scxr3")]
+position = Vector2(1336, 800)
+rotation = 3.14159
+distance = 24
+
+[connection signal="body_entered" from="nEXT" to="." method="_on_n_ext_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

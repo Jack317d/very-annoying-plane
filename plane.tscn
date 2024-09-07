@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://p5gqv8me4mev"]
+
+[ext_resource type="Script" path="res://Plane.gd" id="1_8pxgl"]
+[ext_resource type="Texture2D" uid="uid://dqw4qty35i2rv" path="res://heli.png" id="2_jos1q"]
+[ext_resource type="AudioStream" uid="uid://2dnmdg075wvj" path="res://heli.mp3" id="3_tydus"]
+[ext_resource type="AudioStream" uid="uid://yh0xakmnc667" path="res://explosion (9).wav" id="4_qufeb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amdc5"]
+atlas = ExtResource("2_jos1q")
+region = Rect2(6, 8, 18, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvc6d"]
+atlas = ExtResource("2_jos1q")
+region = Rect2(6, 4, 18, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kevwx"]
+atlas = ExtResource("2_jos1q")
+region = Rect2(6, 0, 18, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8f1x0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amdc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvc6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kevwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvc6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2sy1x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amdc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvc6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kevwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvc6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="Plane" type="CharacterBody2D" groups=["Fannable"]]
+z_index = 1
+script = ExtResource("1_8pxgl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button6" type="Button" parent="CanvasLayer"]
+offset_left = 56.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 576.0
+text = "LEFT"
+
+[node name="Button7" type="Button" parent="CanvasLayer"]
+offset_left = 312.0
+offset_top = 384.0
+offset_right = 520.0
+offset_bottom = 576.0
+text = "RIGHT"
+
+[node name="Button8" type="Button" parent="CanvasLayer"]
+offset_left = 152.0
+offset_top = 256.0
+offset_right = 408.0
+offset_bottom = 352.0
+text = "UP"
+
+[node name="Button9" type="Button" parent="CanvasLayer"]
+offset_left = 648.0
+offset_top = 384.0
+offset_right = 872.0
+offset_bottom = 576.0
+text = "ROTATE COUNT-CLOCK"
+
+[node name="Button10" type="Button" parent="CanvasLayer"]
+offset_left = 904.0
+offset_top = 384.0
+offset_right = 1128.0
+offset_bottom = 576.0
+text = "ROTATE CLOCK"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("2_jos1q")
+region_enabled = true
+region_rect = Rect2(27, 0, 35, 16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(31, -31)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_8f1x0")
+autoplay = "default"
+frame_progress = 0.97246
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-48, -16)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_2sy1x")
+autoplay = "default"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tydus")
+autoplay = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(24, -24, 40, -24, 56, 0, 40, 16, 8, 16, 0, 8, -48, 8, -56, -8, -40, -8, -40, 0, 0, 0, 0, -16)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.03
+one_shot = true
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qufeb")
+volume_db = 2.811
+pitch_scale = 0.89
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

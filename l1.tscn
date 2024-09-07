@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtj4cilsnttme"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_olgco"]
+[ext_resource type="PackedScene" uid="uid://p5gqv8me4mev" path="res://plane.tscn" id="2_215xy"]
+[ext_resource type="PackedScene" uid="uid://duc4ssmg70mjl" path="res://crash.tscn" id="3_gwlv3"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_x1uw6"]
+scenes/1/scene = ExtResource("3_gwlv3")
+
+[sub_resource type="TileSet" id="TileSet_a0yem"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_x1uw6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ch6i"]
+size = Vector2(64, 512)
+
+[node name="L1" type="Node2D"]
+script = ExtResource("1_olgco")
+
+[node name="Plane" parent="." instance=ExtResource("2_215xy")]
+position = Vector2(152, 128)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_a0yem")
+format = 2
+layer_0/tile_data = PackedInt32Array(3, 0, 65536, 4, 0, 65536, 5, 0, 65536, 6, 0, 65536, 7, 0, 65536, 8, 0, 65536, 9, 0, 65536, 10, 0, 65536, 11, 0, 65536, 12, 0, 65536, 589827, 0, 65536, 589828, 0, 65536, 589829, 0, 65536, 589830, 0, 65536, 589831, 0, 65536, 589832, 0, 65536, 589833, 0, 65536, 589834, 0, 65536, 589835, 0, 65536, 589836, 0, 65536, 589837, 0, 65536, 589838, 0, 65536, 589839, 0, 65536, 589840, 0, 65536, 13, 0, 65536, 14, 0, 65536, 15, 0, 65536, 16, 0, 65536, 589841, 0, 65536, 17, 0, 65536, 2, 0, 65536, 1, 0, 65536, 0, 0, 65536, 65536, 0, 65536, 131072, 0, 65536, 196608, 0, 65536, 262144, 0, 65536, 327680, 0, 65536, 393216, 0, 65536, 458752, 0, 65536, 524288, 0, 65536, 589825, 0, 65536, 589824, 0, 65536, 589826, 0, 65536, 65553, 0, 65536, 131089, 0, 65536, 196625, 0, 65536, 262161, 0, 65536, 327697, 0, 65536, 393233, 0, 65536, 458769, 0, 65536, 524305, 0, 65536)
+
+[node name="nEXT" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nEXT"]
+position = Vector2(1056, 320)
+shape = SubResource("RectangleShape2D_3ch6i")
+
+[node name="ColorRect" type="ColorRect" parent="nEXT"]
+offset_left = 1024.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 576.0
+color = Color(0, 1, 0, 0.392157)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 280.0
+offset_top = 208.0
+offset_right = 808.0
+offset_bottom = 295.0
+theme_override_font_sizes/font_size = 30
+text = "Welcome to your worst nightmare!"
+
+[connection signal="body_entered" from="nEXT" to="." method="_on_n_ext_body_entered"]

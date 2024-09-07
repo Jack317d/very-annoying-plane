@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://2kl7fsw3h0s5"]
+
+[ext_resource type="Texture2D" uid="uid://dqy3mpdrvpbuy" path="res://icon.svg" id="1_f0r3k"]
+[ext_resource type="Script" path="res://fan.gd" id="1_qlgjl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls0v4"]
+size = Vector2(16, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_op64g"]
+size = Vector2(64, 64)
+
+[node name="Fan" type="StaticBody2D"]
+position = Vector2(-24, 0)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_qlgjl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.5)
+texture = ExtResource("1_f0r3k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ls0v4")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(8, 0)
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_op64g")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 8.0
+offset_top = -32.0
+offset_right = 56.0
+offset_bottom = 32.0
+color = Color(1, 1, 1, 0.317647)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

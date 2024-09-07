@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://l2ffcbjqwb0s"]
+
+[ext_resource type="Script" path="res://Turret.gd" id="1_qqqcy"]
+[ext_resource type="Texture2D" uid="uid://dqy3mpdrvpbuy" path="res://icon.svg" id="2_xfra6"]
+[ext_resource type="PackedScene" uid="uid://duc4ssmg70mjl" path="res://crash.tscn" id="3_i1er0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xqnb"]
+radius = 288.25
+
+[node name="Turret" type="StaticBody2D"]
+script = ExtResource("1_qqqcy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.43051e-06, -1.43051e-06)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_xfra6")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(32, -2.38419e-07)
+scale = Vector2(0.25, 0.0625)
+texture = ExtResource("2_xfra6")
+
+[node name="Marker2D" type="Marker2D" parent="Node2D"]
+position = Vector2(48, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3xqnb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Crash" parent="." instance=ExtResource("3_i1er0")]
+visible = false
+scale = Vector2(0.75, 0.75)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

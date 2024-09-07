@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://duc4ssmg70mjl"]
+
+[ext_resource type="Script" path="res://crash.gd" id="1_i7tyh"]
+[ext_resource type="Texture2D" uid="uid://dqy3mpdrvpbuy" path="res://icon.svg" id="1_ihlua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn6j2"]
+size = Vector2(64, 64)
+
+[node name="Crash" type="Area2D"]
+script = ExtResource("1_i7tyh")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ihlua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mn6j2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_mn6j2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

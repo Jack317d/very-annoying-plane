@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://c206xmi46074q"]
+
+[ext_resource type="Script" path="res://casino.gd" id="1_6dxjx"]
+[ext_resource type="Texture2D" uid="uid://dlur6hiwhpuk5" path="res://apple.png" id="2_yibub"]
+
+[node name="Casino" type="Node2D"]
+script = ExtResource("1_6dxjx")
+
+[node name="Coins" type="Label" parent="."]
+offset_left = 960.0
+offset_right = 1152.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(448, 192)
+scale = Vector2(8, 8)
+texture = ExtResource("2_yibub")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(256, 192)
+scale = Vector2(8, 8)
+texture = ExtResource("2_yibub")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(640, 192)
+scale = Vector2(8, 8)
+texture = ExtResource("2_yibub")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 320.0
+offset_top = 320.0
+offset_right = 576.0
+offset_bottom = 384.0
+text = "Spin!"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
